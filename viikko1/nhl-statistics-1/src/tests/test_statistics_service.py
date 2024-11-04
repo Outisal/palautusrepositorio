@@ -60,11 +60,11 @@ class TestStatisticsService(unittest.TestCase):
 
     def test_top_returns_fewer_players_if_how_many_exceeds_list_length(self):
         top_players = self.stats.top(15)  # Requesting more than available
-        self.assertEqual(len(top_players), 5)  # Should return all 10 players
+        self.assertEqual(len(top_players), 5)  # Should return all 5 players
 
     def test_top_returns_exact_number_if_how_many_matches(self):
         top_players = self.stats.top(5)  # Requesting exactly 10 players
-        self.assertEqual(len(top_players), 5)  # Should return all 10 players
+        self.assertEqual(len(top_players), 5)  # Should return all 5 players
 
     def test_top_handles_empty_list(self):
         empty_reader = PlayerReaderStub()
