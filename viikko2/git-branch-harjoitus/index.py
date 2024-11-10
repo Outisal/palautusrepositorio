@@ -11,5 +11,5 @@ y = int(input("luku2: "))
 print(f"{summa(x, y)}")
 print(f"{erotus(x, y)}")
 
-logger("lopetetaan")
+logger("lopetetaan ohjelma")
 print("goodbye!") #lisäys bugikorjaus-branchissa
