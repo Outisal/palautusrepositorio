@@ -1,5 +1,6 @@
 *** Settings ***
 Resource  resource.robot
+Resource  login.robot
 Suite Setup     Open And Configure Browser
 Suite Teardown  Close Browser
 Test Setup      Reset Application Create User And Go To Register Page
@@ -48,6 +49,29 @@ Register With Username That Is Already In Use
     Submit Registration
     Registration Should Fail With Message  Username is already in use
 
+Login After Successful Registration
+    Set Username  newuser
+    Set Password  validPassword1
+    Set Password Confirmation  validPassword1
+    Submit Registration
+    Go To Login Page
+    Set Username  newuser
+    Set Password  validPassword1
+    Submit Credentials
+    Login Should Succeed
+
+Login After Failed Registration
+    Set Username  newuser
+    Set Password  invalidPassword
+    Set Password Confirmation  invalidPassword
+    Submit Registration
+    Registration Should Fail With Message  Password cannot contain only letters
+    Go To Login Page
+    Set Username  newuser
+    Set Password  validPassword1
+    Submit Credentials
+    Login Should Fail With Message  Invalid username or password
+
 *** Keywords ***
 Set Username
     [Arguments]    ${username}
@@ -66,6 +90,17 @@ Submit Registration
 
 Registration Should Succeed
     Welcome Page Should Be Open
+
+Login Should Succeed
+    Main Page Should Be Open
+
+Login Should Fail With Message
+    [Arguments]  ${message}
+    Login Page Should Be Open
+    Page Should Contain  ${message}
+
+Submit Credentials
+    Click Button  Login
 
 Registration Should Fail With Message
     [Arguments]    ${message}
