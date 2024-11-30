@@ -52,6 +52,12 @@ class Kayttoliittyma:
             Komento.KUMOA: Kumoa(sovelluslogiikka)
         }
 
+    def _lue_syote(self):
+        try:
+            return int(self._syote_kentta.get())
+        except ValueError:
+            return 0
+
     def kaynnista(self):
         self._arvo_var = StringVar()
         self._arvo_var.set(self._sovelluslogiikka.arvo())
