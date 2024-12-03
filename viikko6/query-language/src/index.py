@@ -1,19 +1,20 @@
 from player_statistics import Statistics
 from player_reader import PlayerReader
-from matchers import Not, HasFewerThan, All, And, HasAtLeast, PlaysIn, Or
+from query_builder import QueryBuilder
 
 def main():
-    url = "https://studies.cs.helsinki.fi/nhlstats/2023-24/players.txt"
+    url = "https://studies.cs.helsinki.fi//nhlstats/2023-24/players.txt"
     reader = PlayerReader(url)
     stats = Statistics(reader)
 
-    matcher = And(
-    HasAtLeast(70, "points"),
-    Or(
-        PlaysIn("NYR"),
-        PlaysIn("FLA"),
-        PlaysIn("BOS")
-    )
+    query = QueryBuilder()
+
+    matcher = (
+      query
+      .plays_in("NYR")
+      .has_at_least(10, "goals")
+      .has_fewer_than(20, "goals")
+      .build()
     )
 
     for player in stats.matches(matcher):
