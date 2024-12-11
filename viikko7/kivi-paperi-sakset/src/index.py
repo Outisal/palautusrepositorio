@@ -4,7 +4,7 @@ from kps_parempi_tekoaly import KPSParempiTekoaly
 
 
 def main():
-    while True:
+    while True:#stash testi
         print("Valitse pelataanko"
               "\n (a) Ihmistä vastaan"
               "\n (b) Tekoälyä vastaan"
